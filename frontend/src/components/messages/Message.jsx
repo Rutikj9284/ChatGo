@@ -11,7 +11,7 @@ const Message = ({message}) => {
   const chatBgClassName = fromMe ? "chat-end" : "chat-start";
   const profilePic = fromMe? authUser.profilePic: selectedConversation?.profilePic;
   const bgColor = fromMe? "chat-bubble chat-bubble-success": "chat-bubble  bg-blue-700";
-
+  const shakeClass = message.shouldShake ? "shake" : "";
   return (
     <div className={`chat ${chatBgClassName}`}>
       <div className="chat-image avatar">
@@ -22,7 +22,7 @@ const Message = ({message}) => {
           />
         </div>
       </div>
-      <div className={`${bgColor}`}>{message.message}</div>
+      <div className={`${bgColor} ${shakeClass}`}>{message.message}</div>
       <div className="chat-footer text-white opacity-50 text-sm flex gap-1 items-center">{formattedTime}</div>
     </div>
   );

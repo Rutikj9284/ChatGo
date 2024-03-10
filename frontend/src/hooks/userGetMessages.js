@@ -11,6 +11,7 @@ const userGetMessages = () => {
 			try {
 				const res = await fetch(`/api/messages/getMessage/${selectedConversation._id}`);
 				const data = await res.json();
+				console.log(data);
 				if (res.ok) {
 					setMessages(data); // Assuming that the response directly contains an array of messages
 				} else {

@@ -1,5 +1,6 @@
 import Conversation from "../models/conversationModel.js";
 import Message from "../models/messageModel.js";
+import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export  const sendMessage = async(req, res)=>{
     try {
@@ -32,7 +33,17 @@ export  const sendMessage = async(req, res)=>{
 		// await newMessage.save();
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        res.status(201).json(message);
+        //socket io functionality to send it to the reciever so that i would get updated immediately and we will be able to see on screen
+
+        const recieverSocketId = getRecieverSocketId(receiverId);
+
+        if(recieverSocketId){
+            //io.to is used to send events to the specific clients
+            io.to(recieverSocketId).emit("newMessage", newMessage);
+        }
+
+        res.status(201).json(newMessage);
+
 
 
     } catch (error) {

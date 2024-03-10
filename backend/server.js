@@ -6,7 +6,7 @@ import userRoutes from './routes/user.routes.js';
 import connectToDb from './db/connectToDb.js';
 import cookieParser from 'cookie-parser';
 import isAuthorized from './middleware/isAuthorized.js';  //Only authorized/logged in users can send the messages
-const app = express();
+import { app, server } from './socket/socket.js';
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.send("Working let's gooo...");
 })
 
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
     connectToDb();
     console.log(`Server is running on ${PORT}`);
 })

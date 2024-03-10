@@ -21,6 +21,7 @@ const userSendMessage = () => {
 			if (data.error) throw new Error(data.error);
 
 			setMessages([...messages, data]);
+			console.log("Updated messages:", [...messages, data]);
 		} catch (error) {
 			toast.error(error.message);
 		} finally {
