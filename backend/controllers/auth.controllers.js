@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import generateJWT from "../utils/generateJWT.js";
 export const signup = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const { fullName, username, password, confirmPassword, gender } = req.body;
 
